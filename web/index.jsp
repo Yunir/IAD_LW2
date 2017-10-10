@@ -6,7 +6,7 @@
   <title>LW2-Web</title>
   <link rel="stylesheet" type="text/css" href="reset.css">
   <link rel="stylesheet" type="text/css" href="main.css">
-  <%--<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>--%>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 <header>
@@ -52,7 +52,7 @@
     <br>
   </div>
   <div id="frame" class="container">
-    <h3>Результаты:</h3>
+    <h3>Результаты:</h3><span id="results1"></span>
     <iframe name = "graphics" height="325"></iframe>
   </div>
   <div class="clear"></div>
@@ -117,7 +117,26 @@
           y *= -1;
           x = x/100*R;
           y = y/100*R;
-          alert(x + " " + y);
+          //alert(x + " " + y);
+
+          $.ajax({
+              type:'post',//тип запроса: get,post либо head
+          url:'controller',//url адрес файла обработчика
+          data:{'x55':'1', 'y':'2', 'r':'3'},//параметры запроса
+          response:'text',//тип возвращаемого ответа text либо xml
+          error: function (message) {
+                  console.log(message);
+              $('#results1').text(message);
+                  alert("Error " + message);
+          },
+              success:function (data) {//возвращаемый результат от сервера
+                  console.log(data);
+                  $('#results1').html(data);
+                  alert("Correct " + message);
+                  $$('result',$$('result').innerHTML+'<br />'+data);
+          }
+      });
+
       }
   }
   function getCursorPosition(e) {
@@ -151,6 +170,5 @@
       if (document.getElementById('r5').checked) {
           R = document.getElementById('r5').value;
       }
-      alert(R);
   }
 </script>
