@@ -1,0 +1,50 @@
+body {
+    font-family: "Andale Mono", monospace;
+    color: #7CE700;
+    /*background-color: #B5F36D;*/
+    background: url(./images/bg.jpg) 100% 100% no-repeat;
+    background-size: cover;
+}
+#content, header, footer {
+    margin: 0 21%;
+}
+#content {
+    background-color: #71AD2B;
+    color: #9FF33D;
+}
+header, footer {
+    background-color: #519600;
+    padding: 12px 0;
+}
+footer, header, h1 {
+    text-align: center;
+}
+h1 {
+    font-size: 150%;
+    color: #fff;
+}
+h1:first-letter {
+    font-size: 125%;
+}
+.container {
+    width: 40%;
+    float: left;
+    margin: 2.5% 5%;
+}
+.clear {
+    clear: both;
+}
+.container iframe {
+    border: 2px dashed #B5F36D;
+    width: 100%;
+}
+h3 {
+    font-size: 120%;
+    text-decoration: underline;
+    text-decoration-color: #519600;
+    color: #fff;
+    padding: 21px 0 9px 0;
+}
+table tr td{
+    width: 41%;
+}
