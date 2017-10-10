@@ -52,6 +52,7 @@
     <br>
   </div>
   <div id="frame" class="container">
+    <h3>Результаты:</h3>
     <iframe name = "graphics" height="325"></iframe>
   </div>
   <div class="clear"></div>

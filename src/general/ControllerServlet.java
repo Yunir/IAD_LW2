@@ -12,7 +12,6 @@ public class ControllerServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        String Ox = request.getParameter("x44");
         String Oy = request.getParameter("y");
         String NumR = request.getParameter("r");
 

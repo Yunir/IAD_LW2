@@ -1,4 +1,7 @@
 <%@ page import="general.AreaCheckServlet" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.HashMap" %>
 <%@ page contentType="text/html;charset=utf-8" language="java" %>
 <%@ page pageEncoding="utf-8"%>
 
@@ -10,9 +13,6 @@
         body {
             color: #fff;
             font-family: "Andale Mono", monospace;
-        }
-        #time {
-            text-align: right;
         }
         span {
             font-size: 120%;
@@ -28,20 +28,26 @@
     </style>
 </head>
 <body>
-        <%
-            //TODO обработка неверных значений
+<%
+    //TODO обработка неверных значений
     AreaCheckServlet acs = (AreaCheckServlet)request.getAttribute("acs");
+    final ServletContext context = request.getServletContext();
+    final HttpSession sssn = request.getSession();
+    final List<Map<String, String>> queriesList = acs.getSessionQueries(context, sssn);
+    Map<String, String> queryMap;
     out.flush();
     for(int i = 0; i < acs.ox.size(); i++) {
-      out.print(acs.ox.get(i) + " ");
-      if(acs.validate(acs.ox.get(i))){
-          out.print("You are great!");
-      } else {
-          out.print("You lose!");
-      }
+        queryMap = new HashMap<String, String>();
+        queryMap.put("X", acs.ox.get(i));
+        queryMap.put("Y", acs.getOy());
+        queryMap.put("R", acs.getNumR());
+        queryMap.put("A", (acs.validate(acs.ox.get(i))?"+":"-"));
+        queriesList.add(queryMap);
+        //out.print("<p><span>(" + acs.ox.get(i) + ", " + acs.getOy() + "); R = " + acs.getNumR() + "</span> => <b>"+ (acs.validate(acs.ox.get(i))?"+":"-") +"</b></p>");
     }
-    out.print("Welcome, " + acs.getOy() + " " + acs.getNumR());
+    out.print(acs.formResultTable(request));
     out.close();
+
 %>
 </body>
 </html>

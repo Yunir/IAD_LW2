@@ -1,11 +1,16 @@
 package general;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-/**
- * Created by Yunicoed on 25.09.2017.
- */
 public class AreaCheckServlet  {
+    static final String SESSIONS_QUERIES_LISTS = "SessionQueriesLists";
     private String Oy, NumR;
     public ArrayList<String> ox;
 
@@ -39,5 +44,40 @@ public class AreaCheckServlet  {
         else{
             return false;
         }
+    }
+
+    public List<Map<String, String>> getSessionQueries(final ServletContext context, final HttpSession session) {
+        // if it doesn't exist, then create, else return
+        Map<HttpSession, List<Map<String, String>>> map =
+                (Map<HttpSession, List<Map<String, String>>>) context.getAttribute(SESSIONS_QUERIES_LISTS);
+        if (map == null) {
+            context.setAttribute(SESSIONS_QUERIES_LISTS, new HashMap<HttpSession, List<Map<String, String>>>());
+            map = (Map<HttpSession, List<Map<String, String>>>) context.getAttribute(SESSIONS_QUERIES_LISTS);
+        }
+        if (map.get(session) == null)
+            map.put(session, new ArrayList<Map<String, String>>());
+        // map.computeIfAbsent(session, key -> new ArrayList<>());
+        return map.get(session);
+    }
+
+    public String formResultTable(final HttpServletRequest request) throws IOException {
+        final List<Map<String, String>> sessionQueriesList = getSessionQueries(request.getServletContext(), request.getSession());
+        final StringBuilder builder = new StringBuilder();
+        builder.append("<table><tr>");
+        builder.append("<td>X</td>");
+        builder.append("<td>Y</td>");
+        builder.append("<td>R</td>");
+        builder.append("<td>A</td>");
+        builder.append("</tr>");
+        for (final Map<String, String> queryMap : sessionQueriesList) {
+            builder.append("<tr>");
+            builder.append("<td>").append(queryMap.get("X")).append("</td>");
+            builder.append("<td>").append(queryMap.get("Y")).append("</td>");
+            builder.append("<td>").append(queryMap.get("R")).append("</td>");
+            builder.append("<td>").append(queryMap.get("A")).append("</td>");
+            builder.append("</tr>");
+        }
+        builder.append("</table>");
+        return builder.toString();
     }
 }
