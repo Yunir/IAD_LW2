@@ -63,7 +63,7 @@ public class AreaCheckServlet  {
     public String formResultTable(final HttpServletRequest request) throws IOException {
         final List<Map<String, String>> sessionQueriesList = getSessionQueries(request.getServletContext(), request.getSession());
         final StringBuilder builder = new StringBuilder();
-        builder.append("<table><tr>");
+        builder.append("<table id='table_on' width='300'><tr>");
         builder.append("<td>X</td>");
         builder.append("<td>Y</td>");
         builder.append("<td>R</td>");

@@ -17,9 +17,9 @@
         span {
             font-size: 120%;
         }
-        table {
+        #table_on {
             border: 5px inset green;
-            width: 400px;
+            /*width: 400px;*/
             text-align: center;
         }
         tr td {
@@ -29,7 +29,6 @@
 </head>
 <body>
 <%
-    //TODO обработка неверных значений
     AreaCheckServlet acs = (AreaCheckServlet)request.getAttribute("acs");
     final ServletContext context = request.getServletContext();
     final HttpSession sssn = request.getSession();

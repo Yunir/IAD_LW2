@@ -3,14 +3,26 @@ body {
     color: #7CE700;
     /*background-color: #B5F36D;*/
     background: url(./images/bg.jpg) 100% 100% no-repeat;
+    background-color: #71AD2B;
     background-size: cover;
+    display: flex;
+    flex-direction: column;
 }
+
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
+
 #content, header, footer {
     margin: 0 21%;
 }
 #content {
     background-color: #71AD2B;
     color: #9FF33D;
+    flex-grow: 1;
 }
 header, footer {
     background-color: #519600;
@@ -35,7 +47,7 @@ h1:first-letter {
     clear: both;
 }
 .container iframe {
-    border: 2px dashed #B5F36D;
+    /*border: 2px dashed #B5F36D;*/
     width: 100%;
 }
 h3 {
