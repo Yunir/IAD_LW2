@@ -63,7 +63,7 @@ public class AreaCheckServlet  {
     public String formResultTable(final HttpServletRequest request) throws IOException {
         final List<Map<String, String>> sessionQueriesList = getSessionQueries(request.getServletContext(), request.getSession());
         final StringBuilder builder = new StringBuilder();
-        builder.append("<table id='table_on' width='300'><tr>");
+        builder.append("<table id='table_on' width='400'><tr>");
         builder.append("<td>X</td>");
         builder.append("<td>Y</td>");
         builder.append("<td>R</td>");
@@ -71,8 +71,8 @@ public class AreaCheckServlet  {
         builder.append("</tr>");
         for (final Map<String, String> queryMap : sessionQueriesList) {
             builder.append("<tr>");
-            builder.append("<td>").append(queryMap.get("X")).append("</td>");
-            builder.append("<td>").append(queryMap.get("Y")).append("</td>");
+            builder.append("<td>").append((queryMap.get("X")).substring(0, Math.min((queryMap.get("X")).length(), 5))).append("</td>");
+            builder.append("<td>").append((queryMap.get("Y")).substring(0, Math.min((queryMap.get("Y")).length(), 5))).append("</td>");
             builder.append("<td>").append(queryMap.get("R")).append("</td>");
             builder.append("<td>").append(queryMap.get("A")).append("</td>");
             builder.append("</tr>");

@@ -19,6 +19,8 @@
         }
         #table_on {
             border: 5px inset green;
+            color: #fff;
+            font-family: "Andale Mono", monospace;
             /*width: 400px;*/
             text-align: center;
         }

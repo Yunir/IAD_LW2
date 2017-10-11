@@ -48,13 +48,13 @@
                 <input id="r3" name="r" type="radio" value="3"> 3
                 <input id="r4" name="r" type="radio" value="4"> 4
                 <input id="r5" name="r" type="radio" value="5"> 5</p>
-            <input id="bttn" type="submit">
+            <button id="bttn" type="submit">Получить результат</button>
         </form>
         <br>
     </div>
     <div id="frame" class="container">
-        <h3>Результаты:</h3><span id="results1"></span>
-        <iframe id="if" name = "graphics" height="575"></iframe>
+        <h3>Результаты:</h3>
+        <iframe id="if" name = "graphics" height="575"><span id="results1"></span></iframe>
     </div>
     <div class="clear"></div>
 </div>
@@ -106,7 +106,7 @@
     plot_canvas.addEventListener("click", drawPoint, false);
 
     function drawPoint(e) {
-        $('#if').hide();
+        //$('#if').hide();
         if(R == '-1') {
             alert("Выберите какое-нибудь значение R");
         } else {
@@ -121,7 +121,6 @@
             x = x/100*R;
             y = y/100*R;
             //alert(x + " " + y);
-
             $.ajax({
                 type:'post',//тип запроса: get,post либо head
                 url:'controller',//url адрес файла обработчика
@@ -135,6 +134,14 @@
                 success:function (data) {//возвращаемый результат от сервера
                     console.log(data);
                     $('#results1').html(data);
+                    /*$("#if").attr(
+                        "src", "data:text/html;charset=utf-8," + data
+                    );*/
+                    ifr =   document.getElementById('if').contentDocument;
+                    ifr.open();
+                    ifr.writeln(data);
+                    ifr.close();
+                    //$('#if').html(data);
                     /*alert("Correct " + message);
                     $$('result',$$('result').innerHTML+'<br />'+data);*/
                 }
