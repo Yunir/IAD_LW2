@@ -54,11 +54,17 @@
     </div>
     <div id="frame" class="container">
         <h3>Результаты:</h3>
-        <iframe id="if" name = "graphics" height="575"><span id="results1"></span></iframe>
+        <span id="results1"></span>
+        <iframe id="if" name = "graphics" height="575"></iframe>
     </div>
     <div class="clear"></div>
 </div>
-<footer>Copyright. All rights reserved. 2017 </footer>
+<footer>Copyright. All rights reserved. 2017 <br><br>
+    <audio controls autoplay>
+        <source src="sounds/welcome.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</footer>
 </body>
 </html>
 <script>
@@ -106,15 +112,15 @@
     plot_canvas.addEventListener("click", drawPoint, false);
 
     function drawPoint(e) {
-        //$('#if').hide();
+        $('#results1').hide();
         if(R == '-1') {
             alert("Выберите какое-нибудь значение R");
         } else {
             var cell = getCursorPosition(e);
             plot_context.beginPath();
             plot_context.rect(x, y, 5, 5);
-            plot_context.fillStyle = 'yellow';
-            plot_context.fill();
+            //plot_context.fillStyle = 'yellow';
+            //plot_context.fill();
             x -= 150;
             y -= 150;
             y *= -1;
@@ -133,7 +139,7 @@
                 },
                 success:function (data) {//возвращаемый результат от сервера
                     console.log(data);
-                    $('#results1').html(data);
+                    //$('#results1').html(data);
                     /*$("#if").attr(
                         "src", "data:text/html;charset=utf-8," + data
                     );*/
@@ -141,7 +147,18 @@
                     ifr.open();
                     ifr.writeln(data);
                     ifr.close();
-                    //$('#if').html(data);
+
+                    var stra = $('#results1').html(data);
+                    stra = stra.text();
+                    //stra = stra.substr(453);
+                    var numy = stra.search("true");
+                    if(numy != -1) {
+                        plot_context.fillStyle = 'green';
+                    } else {
+                        plot_context.fillStyle = 'red';
+                    }
+                    plot_context.fill();
+                    //$('#results1').text(numy);
                     /*alert("Correct " + message);
                     $$('result',$$('result').innerHTML+'<br />'+data);*/
                 }

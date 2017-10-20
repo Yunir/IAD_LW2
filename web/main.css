@@ -16,17 +16,25 @@ html, body {
     height: 100%;
 }
 
-#content, header, footer {
+#content, footer {
     margin: 0 21%;
 }
 #content {
     background-color: #71AD2B;
     color: #9FF33D;
     flex-grow: 1;
+    padding-top: 75px;
+}
+header {
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    height: 75px;
+    width: 100%;
 }
 header, footer {
     background-color: #519600;
     padding: 12px 0;
+
 }
 footer, header, h1 {
     text-align: center;
