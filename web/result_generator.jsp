@@ -17,13 +17,6 @@
         span {
             font-size: 120%;
         }
-        #table_on {
-            border: 5px inset green;
-            color: #fff;
-            font-family: "Andale Mono", monospace;
-            /*width: 400px;*/
-            text-align: center;
-        }
         tr td {
             border: 2px green;
         }

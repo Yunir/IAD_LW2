@@ -1,9 +1,7 @@
 body {
     font-family: "Andale Mono", monospace;
     color: #7CE700;
-    /*background-color: #B5F36D;*/
-    background: url(./images/bg.jpg) 100% 100% no-repeat;
-    background-color: #71AD2B;
+    background: #71AD2B url(./images/bg.jpg) no-repeat 100% 100%;
     background-size: cover;
     display: flex;
     flex-direction: column;

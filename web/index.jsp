@@ -24,7 +24,7 @@
             <h3>1 шаг - Выберите X координату:</h3>
             <table>
                 <tr>
-                    <td><input type="checkbox" name="x44" value="-4">-4</td>
+                    <td><input type="checkbox" name="x44" value="-4" title="">-4</td>
                     <td><input type="checkbox" name="x11" value="-1">-1</td>
                     <td><input type="checkbox" name="x2" value="2"> 2</td>
                 </tr>
@@ -119,8 +119,6 @@
             var cell = getCursorPosition(e);
             plot_context.beginPath();
             plot_context.rect(x, y, 5, 5);
-            //plot_context.fillStyle = 'yellow';
-            //plot_context.fill();
             x -= 150;
             y -= 150;
             y *= -1;
@@ -143,7 +141,7 @@
                     /*$("#if").attr(
                         "src", "data:text/html;charset=utf-8," + data
                     );*/
-                    ifr =   document.getElementById('if').contentDocument;
+                    var ifr = document.getElementById('if').contentDocument;
                     ifr.open();
                     ifr.writeln(data);
                     ifr.close();
