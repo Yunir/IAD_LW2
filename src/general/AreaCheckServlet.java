@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Map;
 
 public class AreaCheckServlet  {
-    static final String SESSIONS_QUERIES_LISTS = "SessionQueriesLists";
+    static final private String SESSIONS_QUERIES_LISTS = "SessionQueriesLists";
     private String Oy, NumR;
     public ArrayList<String> ox;
 
     AreaCheckServlet() {
-        ox = new ArrayList();
+        ox = new ArrayList<String>();
     }
 
     public String getOy() {
@@ -38,18 +38,12 @@ public class AreaCheckServlet  {
         double x = Double.parseDouble(xx);
         double y = Double.parseDouble(Oy);
         double r = Double.parseDouble(NumR);
-        if((x>=0 && y>=0 && (y <=((r/2)-x))) || (x>=0 && y<=0 && (Math.pow(x, 2)+Math.pow(y, 2)<=Math.pow(r, 2)) || (x<=0 && y<=00 && y>=(-r/2) && (x >= -r)))){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return (x >= 0 && y >= 0 && (y <= ((r / 2) - x))) || (x >= 0 && y <= 0 && (Math.pow(x, 2) + Math.pow(y, 2) <= Math.pow(r, 2)) || (x <= 0 && y <= 00 && y >= (-r / 2) && (x >= -r)));
     }
 
     public List<Map<String, String>> getSessionQueries(final ServletContext context, final HttpSession session) {
         // if it doesn't exist, then create, else return
-        Map<HttpSession, List<Map<String, String>>> map =
-                (Map<HttpSession, List<Map<String, String>>>) context.getAttribute(SESSIONS_QUERIES_LISTS);
+        Map<HttpSession, List<Map<String, String>>> map = (Map<HttpSession, List<Map<String, String>>>) context.getAttribute(SESSIONS_QUERIES_LISTS);
         if (map == null) {
             context.setAttribute(SESSIONS_QUERIES_LISTS, new HashMap<HttpSession, List<Map<String, String>>>());
             map = (Map<HttpSession, List<Map<String, String>>>) context.getAttribute(SESSIONS_QUERIES_LISTS);
@@ -60,7 +54,7 @@ public class AreaCheckServlet  {
         return map.get(session);
     }
 
-    public String formResultTable(final HttpServletRequest request) throws IOException {
+    public String formResultTable(final HttpServletRequest request) {
         final List<Map<String, String>> sessionQueriesList = getSessionQueries(request.getServletContext(), request.getSession());
         final StringBuilder builder = new StringBuilder();
         builder.append("<table id='table_on' width='400'><tr>");
